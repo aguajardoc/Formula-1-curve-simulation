@@ -1,0 +1,28 @@
+Requisitos en términos numéricos:
+
+1. 500 > integral de 30 a 260 de sqrt(1+(f'(x))^2) dx > 300 (Longitud de arco)
+
+2. a0 + 30a1 + 900a2 + 27000a3 = 230 (Tocar punto inicial de (30, 230))
+
+3. a0 + 80a1 +  6400a2 + 17576000a3 = 80 (Tocar punto final de (260, 80))
+
+4. Que exista algun x para el que (1+(f'(x))^2)^{3/2}/(abs(f''(x))) < 50 (Radio de curvatura)
+Se establece que se sugiere usar los puntos máximos y mínimos para esto, entonces:
+
+Partiendo de a3x^3 + a2x^2 + a1x + a0, se puede derivar e igualar a 0 
+
+Primera derivada: 3a3x^2 + 2a2x + a1 = 0
+
+Usando la Fórmula Cuadrática para despejar por x:
+
+x = (-a2 +- sqrt(a2^2 - 3*a3*a1)) / 3*a3
+
+Nota: una solución imaginaria implica que no hay puntos críticos, por lo que se descarta este tipo de valores en un if.
+
+Si se inserta este valor en la condición dada, esta se puede reescribir de la siguiente manera:
+
+1 / (2*sqrt(a2^2 - 3*a3*a1)) < 50
+
+Para hacer esto más eficiente en el sentido computacional, se puede elevar todo al cuadrado, resultando en la condición usada como el "atajo" en el código fuente:
+
+1/10000 < a2^2 - 3*a3*a1
