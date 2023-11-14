@@ -7,28 +7,22 @@ import time
 ''' Funciones '''
 
 # Regresa la función evaluada en un x dado, de acuerdo a sus coeficientes
-def funcion(a3,a2,a1,x,a0=0):
-    return a3*(x**3) + a2*(x**2) + a1*x + a0
+funcion = lambda a3,a2,a1,x,a0=0: a3*(x**3) + a2*(x**2) + a1*x + a0
 
 # Regresa la primera derivada evaluada en un x dado, de acuerdo a los coeficientes de la función original
-def primderiv(a3,a2,a1,x):
-    return 3*a3*x**2 + 2*a2*x + a1
+primderiv = lambda a3,a2,a1,x: 3*a3*x**2 + 2*a2*x + a1
 
 # Regresa la segunda derivada evaluada en un x dado, de acuerdo a los coeficientes de la función original
-def segderiv(a3,a2,a1,x):
-    return 6*a3*x + 2*a2
+segderiv = lambda a3,a2,a1,x: 6*a3*x + 2*a2
 
 # Regresa el radio de curvatura en un x dado, de acuerdo a los coeficientes de la función original
-def radioCurvatura(a3,a2,a1,x):
-    return ((1.0 + primderiv(a3,a2,a1,x)**2) ** 1.5) / np.abs(segderiv(a3,a2,a1,x))
+radioCurvatura = lambda a3,a2,a1,x: ((1.0 + primderiv(a3,a2,a1,x)**2) ** 1.5) / np.abs(segderiv(a3,a2,a1,x))
 
 # Regresa un valor relacionado al radio de curvatura en los puntos críticos de la función, solo sirve como atajo exclusivamente para esos puntos
-def rC_Crit(a3,a2,a1):
-    return a2**2 - 3*a3*a1
+rC_Crit = lambda a3,a2,a1: a2**2 - 3*a3*a1
 
 # Regresa el integrando de la funcion a integrar
-def integrando(a3,a2,a1,x):
-    return math.sqrt(1+ primderiv(a3,a2,a1,x)**2)
+integrando = lambda a3, a2, a1, x: math.sqrt(1+ primderiv(a3,a2,a1,x)**2)
 
 # Regresa la longitud de arco de acuerdo a los coeficientes de la función original
 def longitudArco(a3,a2,a1):
