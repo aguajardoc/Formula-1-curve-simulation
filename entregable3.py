@@ -78,7 +78,7 @@ plt.scatter([30,260],[230, 79.99485194035822], color='magenta', label='Puntos in
 
 # Graficar la recta tangente en cualquier punto de la zona de riesgo
 #for i in zonaRiesgo:
-i = float(input("Punto de la lista: "))
+i = zonaRiesgo[0]
 
 x0 = i
 y0 = funcion(i)
@@ -86,7 +86,7 @@ y0 = funcion(i)
 rangox = np.linspace(x0 - 50, x0 + 50)
 
 linea = lambda rangox, x0, y0: pendiente(x0)*(rangox-x0) + y0
-plt.gca().plot(rangox, linea(rangox,x0,y0), 'c--', linewidth = 1)
+plt.gca().plot(rangox, linea(rangox,x0,y0), 'c--', linewidth = 1.5)
 
 
 # Mostrar texto a un lado de los puntos
@@ -96,7 +96,7 @@ plt.text(260, 79.99485194035822, f"({260}, {79.99485194035822:.4f})")     # punt
 # Etiquetas de los ejes y leyenda
 plt.xlabel("X")
 plt.ylabel("Y")
-plt.legend(["Curva Generada","Zona de Riesgo","Rectas Tangentes"])
+plt.legend(["Curva Generada","Zona de Riesgo","Puntos Inicial y Final", "Recta Tangente"])
 
 # Mostrar plot con ejes iguales :)
 plt.axis("equal")
