@@ -94,8 +94,8 @@ plt.gca().plot(rangox, linea(rangox,x0,y0), 'c--', linewidth = 1.5, dashes = ray
 plt.gca().plot(rangox2, linea(rangox2,x02,y02), 'm--', linewidth = 1.5, dashes = rayas, label = "Recta Tangente Final")
 
 # Gradas de 80m x 10m
-grada1 = plt.Rectangle([147.7,348.7], -80, 10, angle = 27, rotation_point = "xy")
-grada2 = plt.Rectangle([221,267.1], 80, 10, angle = -73, rotation_point = "xy")
+grada1 = plt.Rectangle([147.7,353.7], -80, 10, angle = 27, rotation_point = "xy")
+grada2 = plt.Rectangle([227,267.1], 80, 10, angle = -73, rotation_point = "xy")
 plt.gca().add_patch(grada1)
 plt.gca().add_patch(grada2)
 
