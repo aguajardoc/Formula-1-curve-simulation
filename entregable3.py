@@ -10,11 +10,8 @@ Profesor: Gerardo Ramón Fox
 
 '''
 
-import random
 import numpy as np
-import math
 import matplotlib.pyplot as plt
-import time
 
 ''' Funciones '''
 
@@ -60,10 +57,10 @@ print(f"\n\n\Rango de puntos de Zona de Riesgo: {zonaRiesgo[0]}, {zonaRiesgo[-1]
 x_valoresPol = np.linspace(30,260,500)
 y_valoresPol = funcion(x_valoresPol)
 
-# Graficar estos valores como una línea azul usando matplotlib
-plt.plot(x_valoresPol,y_valoresPol, "-b")
+# Graficar estos valores como líneas usando matplotlib
+plt.plot(x_valoresPol,y_valoresPol, "-k",linewidth = 10, label = "Curva Generada")
 
-# Declarar un linspace de 30 a 260 y sus valores de y correspondientes
+# Declarar un linspace de la zona de riesgo y sus valores de y correspondientes
 x_valores = np.linspace(zonaRiesgo[0],zonaRiesgo[-1],len(zonaRiesgo))
 y_valores = list(range(len(zonaRiesgo)))
 
@@ -71,32 +68,41 @@ for i in range(len(zonaRiesgo)):
     y_valores[i] = funcion(zonaRiesgo[i])
 
 # Graficar estos valores como una línea azul usando matplotlib
-plt.plot(x_valores,y_valores[::], "-r", linewidth = 3)
+plt.plot(x_valores,y_valores[::], color="#FFEA00", linewidth=10.6, label = "Zona de Derrape/Riesgo")
 
-## Graficar los puntos inicial y final
-plt.scatter([30,260],[230, 79.99485194035822], color='magenta', label='Puntos inicial y final')
+# Graficar línea punteada con los valores de antes
+plt.plot(x_valoresPol,y_valoresPol, "--w", linewidth = 1.5)
 
 # Graficar la recta tangente en cualquier punto de la zona de riesgo
-#for i in zonaRiesgo:
 i = zonaRiesgo[0]
+j = zonaRiesgo[-1]
 
 x0 = i
 y0 = funcion(i)
 
-rangox = np.linspace(x0 - 50, x0 + 50)
+x02 = j
+y02 = funcion(j)
+
+rangox = np.linspace(x0 - 10, x0 + 80)
+rangox2 = np.linspace(x02 - 10, x02 + 80)
 
 linea = lambda rangox, x0, y0: pendiente(x0)*(rangox-x0) + y0
-plt.gca().plot(rangox, linea(rangox,x0,y0), 'c--', linewidth = 1.5)
 
+rayas = [2,2]
 
-# Mostrar texto a un lado de los puntos
-plt.text(30, 230 + a0, f"({30}, {230})") # punto1 + a0 siempre será igual a 230
-plt.text(260, 79.99485194035822, f"({260}, {79.99485194035822:.4f})")     # punto2 redondeado a 4 decimales
+plt.gca().plot(rangox, linea(rangox,x0,y0), 'c--', linewidth = 1.5, dashes = rayas, label = "Recta Tangente Inicial")
+plt.gca().plot(rangox2, linea(rangox2,x02,y02), 'm--', linewidth = 1.5, dashes = rayas, label = "Recta Tangente Final")
+
+# Gradas de 80m x 10m
+grada1 = plt.Rectangle([147.7,348.7], -80, 10, angle = 27, rotation_point = "xy")
+grada2 = plt.Rectangle([221,267.1], 80, 10, angle = -73, rotation_point = "xy")
+plt.gca().add_patch(grada1)
+plt.gca().add_patch(grada2)
 
 # Etiquetas de los ejes y leyenda
 plt.xlabel("X")
 plt.ylabel("Y")
-plt.legend(["Curva Generada","Zona de Riesgo","Puntos Inicial y Final", "Recta Tangente"])
+plt.legend()
 
 # Mostrar plot con ejes iguales :)
 plt.axis("equal")
