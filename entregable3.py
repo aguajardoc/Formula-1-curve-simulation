@@ -72,7 +72,7 @@ y_valores = list(range(len(zonaRiesgo)))
 for i in range(len(zonaRiesgo)):
     y_valores[i] = funcion(zonaRiesgo[i])
 
-# Graficar estos valores como una línea azul usando matplotlib
+# Graficar estos valores usando matplotlib
 plt.plot(x_valores,y_valores[::], color="#FFEA00", linewidth=10.6, label = "Zona de Derrape/Riesgo")
 
 # Graficar línea punteada con los valores de antes para que parezca calle
@@ -93,6 +93,7 @@ rangox2 = np.linspace(x02 - 10, x02 + 80)
 
 # Función de la recta tangente
 linea = lambda rangox, x0, y0: pendiente(x0)*(rangox-x0) + y0
+normal = lambda rangox, x0, y0: (-1/(pendiente(x0))) * (rangox-x0) + y0
 
 # Valor que determina la longitud de las rayas punteadas, correspondiente al parámtero "dashes"
 rayas = [2,2]
@@ -100,16 +101,11 @@ rayas = [2,2]
 # En los ejes actuales, graficar: el rango de x como valores de x, aquellos evaluados en la función de la recta tangente como y.
 plt.gca().plot(rangox, linea(rangox,x0,y0), 'c--', linewidth = 1.5, dashes = rayas, label = "Recta Tangente Inicial") # Color cián
 plt.gca().plot(rangox2, linea(rangox2,x02,y02), 'm--', linewidth = 1.5, dashes = rayas, label = "Recta Tangente Final") # Color magenta
+plt.gca().plot(rangox, normal(rangox,x0,y0), 'r--', linewidth = 1.5, dashes = rayas)
 
-### Gradas de 80m x 10m
-'''
-- El posicionamiento de la grada1 se determinó por ubicarse justo antes de la recta tangente al primer punto la zona de derrape. Por lo tanto, si el vehículo llegara a exceder la velocidad máxima para la curva, los espectadores están a salvo, mientras que su experiencia al ver la carrera se maximiza.
-- La grada2 sigue una filosofía similar: se ubica justo después de la recta tangente al último punto de la zona de derrape. De esta manera, también se mantiene la seguridad y la experiencia de visualización de los espectadores.
-'''
-grada1 = plt.Rectangle([147.7,353.7], -80, 10, angle = 27, rotation_point = "xy")
-grada2 = plt.Rectangle([227,267.1], 80, 10, angle = -73, rotation_point = "xy")
+### Gradas de 80m x 10m (angle = tan^{-1} (pendiente(x0)))
+grada1 = plt.Rectangle([zonaRiesgo[0],funcion(zonaRiesgo[0]) + 15], 80, 10, angle = 16.29, rotation_point = "xy")
 plt.gca().add_patch(grada1)
-plt.gca().add_patch(grada2)
 
 # Etiquetas de los ejes y leyenda
 plt.xlabel("X")
