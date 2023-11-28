@@ -71,6 +71,14 @@ Paquetería necesaria: MATLAB (De preferencia R2023b o superior), archivos
 de sonido "Drift.wav", "Crash.wav" y "carro.wav", todos proveídos en la
 misma carpeta del programa.
 
+Referencias:
+
+Fédération Internationale de l'Automobile. (2022, diciembre 7). 2023
+FORMULA 1 TECHNICAL REGULATIONS. https://www.fia.com/sites/default/files/fia_2023_formula_1_technical_regulations_-_issue_4_-_2022-12-07.pdf
+
+Motorsport. (2021, agosto 24). Licencia de circuitos FIA: requisitos para ser sede de F1 y más. https://es.motorsport.com/f1/news/licencia-circuitos-fia-requisitos-formula1/6509978/
+
+Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.com/in-the-wet/
             %}
 
             % Reiniciar ejes y activar el hold para que se sobreponga el
