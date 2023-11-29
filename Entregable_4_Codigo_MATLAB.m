@@ -739,7 +739,7 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
             velms = vel/3.6;
 
             %% Sin derrape
-            if velms < maxvel && velms > 0
+            if (isempty(zonaRiesgo)) || (velms < maxvel && velms > 0)
 
                 % Empezar con un punto para que se pueda modificar la variable
                 plotvelnorm = plot(app.UIAxes,x_valoresPol(1), y_valoresPol(1), 'diamondm', "MarkerSize", 5, "MarkerFaceColor", "m");
