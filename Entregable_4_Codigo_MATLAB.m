@@ -825,8 +825,6 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                 app.EnergaPerdidaenDerrapeJEditField.Value = velms^2*(masa)/2;
 
             end
-
-            % NO JALA EL ULTIMO
         end
     end
 
