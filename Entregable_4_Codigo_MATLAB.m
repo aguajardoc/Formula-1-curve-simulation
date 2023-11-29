@@ -35,6 +35,14 @@ classdef Entregable4 < matlab.apps.AppBase
         % Button pushed function: IniciarSimulacinButton
         function IniciarSimulacinButtonPushed(app, event)
             %{
+Entregable 4 del Reto: Código
+
+Alejandro Guajardo Caba - A01178375
+Ricardo Manuel Barbosa Flores - A00823815
+Homero Maximiliano Flores Betancourt - A00840253
+
+F1005B: Modelación Computacional Aplicando Leyes de Conservación
+Profesor: Gerardo Ramón Fox
 
 El objetivo de este reto es modelar una posible curva que pueda aplicarse
 en una nueva pista de Fórmula 1. Para esto, además de generar de manera
@@ -91,6 +99,12 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
             a2 = 0.007198311361420753;
             a1 = 0.843898854917533;
             a0 = 199.47267138843134;
+
+            % Actualizar valores si es necesario
+            app.a3EditField.Value = a3;
+            app.a2EditField.Value = a2;
+            app.a1EditField.Value = a1;
+            app.a0EditField.Value = a0;
 
             % Regresa la función evaluada en un x dado, de acuerdo a sus coeficientes
             funcion = @(x) a3*x.^3 + a2*x.^2 + a1*x + a0;
@@ -319,15 +333,17 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     end
                     app.DistanciaRecorridaenDerrapemEditField.Value = distanciaAct(derrape);
                     app.EnergaPerdidaenDerrapeJEditField.Value = fk*distanciaAct(derrape);
+
+                    if derrape == 35
+                        % Reproducir sonido de choque
+                        sound(y2, Fs2)
+                    end
                 end
 
                 delete(plotvelexcedenteP2)
 
                 % Mostrar de color naranja para indicar que choca
                 plot(app.UIAxes, rangoxtan(101), rangoy(101), 'diamond', "Color", [255, 165, 0] /256, "MarkerSize", 5, "MarkerFaceColor", [255, 165, 0] /256);
-
-                % Reproducir sonido de choque
-                sound(y2, Fs2)
 
                 % Calcular y desplegar valores finales de distancia y
                 % energía perdida
@@ -581,12 +597,15 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     end
                     app.DistanciaRecorridaenDerrapemEditField.Value = distanciaAct(derrape);
                     app.EnergaPerdidaenDerrapeJEditField.Value = fk*distanciaAct(derrape);
+                    
+                    if derrape == 35
+                        % Reproducir sonido de choque
+                        sound(y2, Fs2)
+                    end
                 end
 
                 plot(app.UIAxes, rangoxtan(101), rangoy(101), 'diamond', "Color", [255, 165, 0] /256, "MarkerSize", 5, "MarkerFaceColor", [255, 165, 0] /256);
 
-                sound(y2, Fs2)
-                
                 app.DistanciaRecorridaenDerrapemEditField.Value = velms^2*(cos(theta) - uk*sin(theta))/(2*g*uk);
                 app.EnergaPerdidaenDerrapeJEditField.Value = velms^2*(masa)/2;
             end
@@ -793,12 +812,15 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     end
                     app.DistanciaRecorridaenDerrapemEditField.Value = distanciaAct(derrape);
                     app.EnergaPerdidaenDerrapeJEditField.Value = fk*distanciaAct(derrape);
+                    
+                    if derrape == 35
+                        % Reproducir sonido de choque
+                        sound(y2, Fs2)
+                    end
                 end
 
                 plot(app.UIAxes, rangoxtan(101), rangoy(101), 'diamond', "Color", [255, 165, 0] /256, "MarkerSize", 5, "MarkerFaceColor", [255, 165, 0] /256);
 
-                sound(y2, Fs2)
-                
                 app.DistanciaRecorridaenDerrapemEditField.Value = velms^2*(cos(theta) - uk*sin(theta))/(2*g*uk);
                 app.EnergaPerdidaenDerrapeJEditField.Value = velms^2*(masa)/2;
 
