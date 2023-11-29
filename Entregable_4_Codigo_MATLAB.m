@@ -222,7 +222,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     plotvelnorm.XData = x_valoresPol(i); % Cambiar valor de x
                     plotvelnorm.YData = y_valoresPol(i); % Cambiar valor de Y
 
-                    pause(0.05) % Para velocidad de gráfico constante
+                    if i ~= 499
+                        pause(0.05) % Para velocidad de gráfico constante
+                    end 
 
                     % Actualizar el tiempo por la pausa
                     tiempoTranscurrido = tiempoTranscurrido + 0.05;
@@ -264,12 +266,14 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
 
                 % Mientras no se exceda el primer valor de zonaRiesgo, que
                 % guarda valores de x
-                while x_valoresPol(normal) < 131.86372745490982
+                while x_valoresPol(normal) < zonaRiesgo(1)
 
                     plotvelexcedenteP1.XData = x_valoresPol(normal);
                     plotvelexcedenteP1.YData = y_valoresPol(normal);
 
-                    pause(0.05)
+                    if x_valoresPol(normal) < zonaRiesgo(1)
+                        pause(0.05)
+                    end
                     normal = normal + 2;
                 end
 
@@ -318,7 +322,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     plotvelexcedenteP2.XData = rangoxtan(derrape);
                     plotvelexcedenteP2.YData = rangoy(derrape);
 
-                    pause(0.05)
+                    if derrape ~= 101
+                        pause(0.05)
+                    end
                     app.DistanciaRecorridaenDerrapemEditField.Value = distanciaAct(derrape);
                     app.EnergaPerdidaenDerrapeJEditField.Value = fk*distanciaAct(derrape);
                 end
@@ -347,6 +353,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
             % parámetros establecidos en el Entregable 2 de este reto
             % (Radio de Curvatura < 50, 300 < longitud de arco < 500, y que
             % toque los puntos (30,230) y (260,80)).
+
+            hold(app.UIAxes, 'on');
+            cla(app.UIAxes)
 
             %{ Funciones }%
 
@@ -520,7 +529,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     plotvelnorm.XData = x_valoresPol(i);
                     plotvelnorm.YData = y_valoresPol(i);
 
-                    pause(0.05)
+                    if i ~= 499
+                        pause(0.05)
+                    end
                     tiempoTranscurrido = tiempoTranscurrido + 0.05;
                     if tiempoTranscurrido >= t
                         sound(y3, Fs3)
@@ -543,7 +554,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     plotvelexcedenteP1.XData = x_valoresPol(normal);
                     plotvelexcedenteP1.YData = y_valoresPol(normal);
 
-                    pause(0.05)
+                    if x_valoresPol(normal) < zonaRiesgo(1)
+                        pause(0.05)
+                    end
                     normal = normal + 2;
                 end
 
@@ -558,17 +571,30 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                 rangoxtan = linspace(zonaRiesgo(1), zonaRiesgo(1) + distx, 101);
                 rangoy = linea(rangoxtan,zonaRiesgo(1),funcion(a3,a2,a1,zonaRiesgo(1),a0),a3,a2,a1);
 
+                % Vector guardando distancias
+                distanciaAct = linspace(0,d,101);
+
+                % Valor de fricción
+                masa = 796; % Peso mínimo de un carro de Fórmula 1 (Fédération Internationale de l'Automobile, 2022).
+                fk = uk * masa * g / (cos(theta) - uk * sin(theta));
+
                 plotvelexcedenteP2 = plot(app.UIAxes, rangoxtan(1), rangoy(1), 'diamondr',"MarkerSize", 5, "MarkerFaceColor", "r");
 
                 for derrape = 1:2:101
                     plotvelexcedenteP2.XData = rangoxtan(derrape);
                     plotvelexcedenteP2.YData = rangoy(derrape);
 
-                    pause(0.05)
+                    if derrape ~= 101
+                        pause(0.05)
+                    end
+                    app.DistanciaRecorridaenDerrapemEditField.Value = distanciaAct(derrape);
+                    app.EnergaPerdidaenDerrapeJEditField.Value = fk*distanciaAct(derrape);
                 end
 
+                plot(app.UIAxes, rangoxtan(101), rangoy(101), 'diamond', "Color", [255, 165, 0] /256, "MarkerSize", 5, "MarkerFaceColor", [255, 165, 0] /256);
+
                 sound(y2, Fs2)
-                masa = 796;
+                
                 app.DistanciaRecorridaenDerrapemEditField.Value = velms^2*(cos(theta) - uk*sin(theta))/(2*g*uk);
                 app.EnergaPerdidaenDerrapeJEditField.Value = velms^2*(masa)/2;
             end
@@ -584,6 +610,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
 
             hold(app.UIAxes, 'on');
             cla(app.UIAxes)
+
+            app.DistanciaRecorridaenDerrapemEditField.Value = 0;
+            app.EnergaPerdidaenDerrapeJEditField.Value = 0;
 
             %{ Cargar Efectos de Sonido }%
 
@@ -665,7 +694,7 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
 
             app.LongituddepistamEditField.Value = longitudArco();
 
-            if a2^2 - 3*abs(a3)*abs(a1) >= 0
+            if a2^2 - 3*a3*a1 >= 0
                 app.RadiodeCurvaturaenmximomEditField.Value = 1 / (2*sqrt(a2^2 - 3*a3*a1));
             else
                 app.RadiodeCurvaturaenmximomEditField.Value = Inf;
@@ -708,7 +737,9 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                     plotvelnorm.XData = x_valoresPol(i); % Cambiar valor de x
                     plotvelnorm.YData = y_valoresPol(i); % Cambiar valor de Y
 
-                    pause(0.05) % Para velocidad de gráfico constante
+                    if i ~= 499
+                        pause(0.05) % Para velocidad de gráfico constante
+                    end
                     tiempoTranscurrido = tiempoTranscurrido + 0.05;
                     if tiempoTranscurrido >= t
                         sound(y3, Fs3)
@@ -731,12 +762,14 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                 plotvelexcedenteP1 = plot(app.UIAxes,x_valoresPol(1), y_valoresPol(1), 'diamondm', "MarkerSize", 5, "MarkerFaceColor", "m");
                 normal = 1;
 
-                while x_valoresPol(normal) < 131.86372745490982
+                while x_valoresPol(normal) < zonaRiesgo(1)
 
                     plotvelexcedenteP1.XData = x_valoresPol(normal);
                     plotvelexcedenteP1.YData = y_valoresPol(normal);
 
-                    pause(0.05)
+                    if x_valoresPol(normal) < zonaRiesgo(1)
+                        pause(0.05)
+                    end
                     normal = normal + 2;
                 end
 
@@ -748,23 +781,38 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
 
                 distx = d*cos(anguloTan);
 
-                rangoxtan = linspace(i, i + distx, 101);
+                rangoxtan = linspace(zonaRiesgo(1), zonaRiesgo(1) + distx, 101);
                 rangoy = linea(rangoxtan,zonaRiesgo(1),funcion(zonaRiesgo(1)));
+
+                % Vector guardando distancias
+                distanciaAct = linspace(0,d,101);
+
+                % Valor de fricción
+                masa = 796; % Peso mínimo de un carro de Fórmula 1 (Fédération Internationale de l'Automobile, 2022).
+                fk = uk * masa * g / (cos(theta) - uk * sin(theta));
 
                 plotvelexcedenteP2 = plot(app.UIAxes, rangoxtan(1), rangoy(1), 'diamondr',"MarkerSize", 5, "MarkerFaceColor", "r");
 
                 for derrape = 1:2:101
                     plotvelexcedenteP2.XData = rangoxtan(derrape);
                     plotvelexcedenteP2.YData = rangoy(derrape);
-
-                    pause(0.05)
+                    if derrape ~= 101
+                        pause(0.05)
+                    end
+                    app.DistanciaRecorridaenDerrapemEditField.Value = distanciaAct(derrape);
+                    app.EnergaPerdidaenDerrapeJEditField.Value = fk*distanciaAct(derrape);
                 end
+
+                plot(app.UIAxes, rangoxtan(101), rangoy(101), 'diamond', "Color", [255, 165, 0] /256, "MarkerSize", 5, "MarkerFaceColor", [255, 165, 0] /256);
+
                 sound(y2, Fs2)
-                masa = 796;
+                
                 app.DistanciaRecorridaenDerrapemEditField.Value = velms^2*(cos(theta) - uk*sin(theta))/(2*g*uk);
                 app.EnergaPerdidaenDerrapeJEditField.Value = velms^2*(masa)/2;
 
             end
+
+            % NO JALA EL ULTIMO
         end
     end
 
