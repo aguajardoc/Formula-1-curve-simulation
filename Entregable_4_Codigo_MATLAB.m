@@ -35,14 +35,6 @@ classdef Entregable4 < matlab.apps.AppBase
         % Button pushed function: IniciarSimulacinButton
         function IniciarSimulacinButtonPushed(app, event)
             %{
-Entregable 4 del Reto: Código
-
-Alejandro Guajardo Caba - A01178375
-Ricardo Manuel Barbosa Flores - A00823815
-Homero Maximiliano Flores Betancourt - A00840253
-
-F1005B: Modelación Computacional Aplicando Leyes de Conservación
-Profesor: Gerardo Ramón Fox
 
 El objetivo de este reto es modelar una posible curva que pueda aplicarse
 en una nueva pista de Fórmula 1. Para esto, además de generar de manera
