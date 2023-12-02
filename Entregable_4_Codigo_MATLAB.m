@@ -318,7 +318,7 @@ Physics Of Formula 1. (s.f.). In the wet. https://physicsofformula1.wordpress.co
                 distanciaAct = linspace(0,d,101);
 
                 % Valor de fricción
-                masa = 796; % Peso mínimo de un carro de Fórmula 1 (Fédération Internationale de l'Automobile, 2022).
+                masa = 796; % Masa mínima de un carro de Fórmula 1 (Fédération Internationale de l'Automobile, 2022).
                 fk = uk * masa * g / (cos(theta) - uk * sin(theta));
 
                 % Se repite el proceso como anteriormente
