@@ -43,4 +43,4 @@ Although both, .mlapp and .m, files contain the same code, only the mlapp file c
 ### 6. Play with the app's features ;)
 
 ## Note 
-The code.m file allows visualization of the code without downloading the .mlapp file
+The final_delivery.m file allows visualization of the code without downloading the .mlapp file
