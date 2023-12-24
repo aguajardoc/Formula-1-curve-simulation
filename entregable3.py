@@ -1,15 +1,3 @@
-'''
-Entregable 3 del Reto
-
-Alejandro Guajardo Caba - A01178375
-Ricardo Manuel Barbosa Flores - A00823815
-Homero Maximiliano Flores Betancourt - A00840253
-
-F1005B: Modelación Computacional Aplicando Leyes de Conservación
-Profesor: Gerardo Ramón Fox
-
-'''
-
 import numpy as np
 import matplotlib.pyplot as plt
 
