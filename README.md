@@ -6,7 +6,7 @@ MATLAB App that simulates a Formula 1 car's path over a computer generated curve
 
 The default curve is a third degree polynomial, whose values can be changed within the app to better suit user needs. Additionally, a completely new curve can be generated with random values which can be adjuusted later on if necessary.
 
-This app was designed as the final project for my Computational Modeling Applying Conservation Laws course, during my first semester at university. The course was taught in Spanish, so all elements of the app are implemented in Spanish.
+This app was designed as a final project during my first semester at university. The course was taught in Spanish, so all elements of the app are implemented in Spanish.
 
 Because of the academic nature of this project, the generated curve has to abide to a list of requirements, presented below.
 
